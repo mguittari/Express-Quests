@@ -22,30 +22,21 @@ app.post(
   userControllers.getUserByEmailWithPasswordAndPassToNext,
   verifyPassword
 );
-app.post("/api/users", hashedPassword, userControllers.postUser);
+app.post("/api/users", validateUser, hashedPassword, userControllers.postUser);
 
-app.use(verifyToken);
+
 
 // private routes
 
+app.use(verifyToken);
+
 app.post("/api/movies", validateMovie, movieControllers.postMovie);
-// app.post("/api/users", validateUser, userControllers.postUser);
 
 app.put("/api/movies/:id", validateMovie, movieControllers.updateMovie);
-// app.put("/api/users/:id", validateUser, userControllers.updateUser);
-app.put("/api/users/:id", hashedPassword, userControllers.updateUser);
-
+app.put("/api/users/:id", validateUser, hashedPassword, userControllers.updateUser);
 
 app.delete("/api/movies/:id", movieControllers.deleteMovie);
 app.delete("/api/users/:id", userControllers.deleteUser);
-
-// const isItMatt = (req, res) => {
-//   if (req.body.email === "matt@me.com" && req.body.password === "123456") {
-//     res.send("Credentials are valid");
-//   } else {
-//     res.sendStatus(401);
-//   }
-// };
 
 
 

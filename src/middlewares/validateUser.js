@@ -2,7 +2,7 @@ const { hashedPassword } = require("./auth");
 
 const validateUser = (req, res, next) => {
 
-const { firstname, lastname, email, city, language, hashedPassword } = req.body;
+const { firstname, lastname, email, city, language, password } = req.body;
  const errors = [];
  const emailRegex = /[a-z0-9._]+@[a-z0-9-]+\.[a-z]{2,3}/;
 
@@ -31,9 +31,9 @@ const { firstname, lastname, email, city, language, hashedPassword } = req.body;
   } else if (language.length >= 50) {
     errors.push({ field: "language", message: "Should contain less than 50 characters"})
   }
-  if (hashedPassword == null) {
+  if (password == null) {
     errors.push({ field: "password", message: "This field is required" });
-  } else if (hashedPassword.length >= 50) {
+  } else if (password.length >= 50) {
     errors.push({ field: "password", message: "Should contain less than 50 characters"})
   }
  
