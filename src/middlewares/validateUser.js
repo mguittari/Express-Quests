@@ -44,4 +44,4 @@ const { firstname, lastname, email, city, language, hashedPassword } = req.body;
   }
 };
 
-module.exports = validateUser;
+module.exports = validateUser, hashedPassword;
